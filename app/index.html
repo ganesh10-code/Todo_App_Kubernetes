@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team To-Do</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:48px auto;padding:0 18px;color:#172033;background:#f6f8fb}
+    main{background:white;padding:28px;border-radius:16px;box-shadow:0 8px 28px #17203312}
+    h1{margin:0 0 6px}.version{color:#52637a;font-size:.9rem}
+    form{display:flex;gap:8px;margin:22px 0}input{flex:1;padding:12px;border:1px solid #cbd5e1;border-radius:8px}
+    button{padding:11px 15px;border:0;border-radius:8px;background:#2457d6;color:white;cursor:pointer}
+    li{padding:10px 0;border-bottom:1px solid #e8edf4}li button{float:right;background:#64748b;padding:5px 9px}
+    .note{margin-top:20px;color:#52637a;font-size:.9rem}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Team To-Do</h1>
+  <div class="version">Deployment version: <strong id="version">VERSION_PLACEHOLDER</strong></div>
+  <p>A lightweight shared-team task list demo deployed on Kubernetes.</p>
+  <form id="form"><input id="task" aria-label="New task" placeholder="Add a task..." required><button>Add task</button></form>
+  <ul id="tasks"></ul>
+  <div class="note">Demo note: tasks are stored in this browser only; this project focuses on Kubernetes deployment, rollout, recovery, and monitoring.</div>
+</main>
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const input = document.getElementById("task");
+  const li = document.createElement("li");
+  const label = document.createElement("span");
+  label.textContent = input.value;
+  const button = document.createElement("button");
+  button.textContent = "Done";
+  button.onclick = () => li.remove();
+  li.append(label, button);
+  document.getElementById("tasks").appendChild(li);
+  input.value = "";
+});
+</script>
+</body>
+</html>
